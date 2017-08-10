@@ -33,7 +33,22 @@
 		var type = document.getElementById("precip_type").value;
 		console.log("type => " + type);
 		$("#precip_type").val(type);
-		$("#precipationmap").attr("src", "http://www.niederschlagsradar.de/images.aspx?jaar=-6&type=" + clientdata.geolocation.meteoxcontinent + meteoxtype[type]["ext"] + "&datum=" + meteoxtime + "&cultuur=" + clientdata.geolocation.culture + "&continent=" + clientdata.geolocation.meteoxcontinent );
+		var imgUrl = "http://www.niederschlagsradar.de/images.aspx?jaar=-6&type=" + clientdata.geolocation.meteoxcontinent + meteoxtype[type]["ext"] + "&datum=" + meteoxtime + "&cultuur=" + clientdata.geolocation.culture + "&continent=" + clientdata.geolocation.meteoxcontinent;
+		
+
+		var myImage = document.querySelector('img');
+
+		var idk = fetch(imgUrl).then(function(response) {
+  			console.log("response");
+  			console.log(response);
+  			return response;
+		});
+
+
+		console.log(imageUrl);
+		console.log(idk);
+
+		$("#precipationmap").attr("src", imgUrl)
 	}
 	function meteoxUpdate(time){
 		console.log("UPDATE FOR " + time);
