@@ -31,22 +31,10 @@
 
 	function changeMeteoxType(){
 		var type = document.getElementById("precip_type").value;
-		console.log("type => " + type);
 		$("#precip_type").val(type);
+		// Cannot cache: remote host not using CORS && github does not allow requesting it over http. 
 		var imgUrl = "https://www.niederschlagsradar.de/images.aspx?jaar=-6&type=" + clientdata.geolocation.meteoxcontinent + meteoxtype[type]["ext"] + "&datum=" + meteoxtime + "&cultuur=" + clientdata.geolocation.culture + "&continent=" + clientdata.geolocation.meteoxcontinent;
-		$.ajax({
-    		type: "GET",
-    		url: imgUrl,
-    		dataType: "xml",
-    		success: cacheAndDisplay
-   		});
-
 		$("#precipationmap").attr("src", imgUrl)
-	}
-
-	function cacheAndDisplay(imgXml){
-		console.log("IMAGE");
-		console.log(imgXml);
 	}
 
 	function meteoxUpdate(time){

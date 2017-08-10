@@ -1,4 +1,4 @@
-version = "v2";
+version = "v3";
 
 
 self.addEventListener('push', function(event) {
@@ -16,7 +16,6 @@ self.addEventListener("install", function (event) {
             return cache.addAll([
                 "/",
                 "/manifest.json",
-                "/serviceworker.js",
                 "/index.html",
                 "/assets/css/font_awesome.css",
                 "/assets/css/Raleway.css",
