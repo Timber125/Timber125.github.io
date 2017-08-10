@@ -35,10 +35,16 @@
 		$("#precip_type").val(type);
 		var imgUrl = "https://www.niederschlagsradar.de/images.aspx?jaar=-6&type=" + clientdata.geolocation.meteoxcontinent + meteoxtype[type]["ext"] + "&datum=" + meteoxtime + "&cultuur=" + clientdata.geolocation.culture + "&continent=" + clientdata.geolocation.meteoxcontinent;
 		
+		var myInit = { 
+			   method: 'GET',
+               headers: new Headers(),
+               mode: 'cors',
+               cache: 'default' 
+           };
 
 		var myImage = document.querySelector('img');
 
-		var idk = fetch(imgUrl).then(function(response) {
+		var idk = fetch(imgUrl, myInit).then(function(response) {
   			console.log("response");
   			console.log(response);
   			return response;
