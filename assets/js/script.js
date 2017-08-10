@@ -69,7 +69,6 @@ function init_thundermap(){
 	$("#precip_type").val(3);
 	$("#precip_type")[0].onchange = changeMeteoxType;
 	$("#precip_type")[0].style = "cursor: pointer";
-	console.log("hmm");
 	changeMeteoxType();
 }
 
@@ -168,7 +167,6 @@ function revealClientIP(){
 }
 
 function handleIp(ip_json){
-	//console.log("ip: " + ip_json.ip);
 	getLocation(ip_json.ip);
 }
 
@@ -188,8 +186,6 @@ function geoparserGPS(lon, lat){
 
 function geoparserIP(json){
 
-	console.log("geoparseing ip");
-	console.log(json);
 
 	updateClientData(json.longitude, json.latitude, json.cityName, json.regionName, json.countryName, json.countryCode, 2)
 
@@ -217,16 +213,11 @@ function updateClientData(lon, lat, city, region, country, countrycode, trust){
 			clientdata.geolocation.origin = "IP";
 			clientdata.geolocation.origindesc = "Medium accuracy - please disable proxies.";
 		}
-		console.log("UPDATING CLIENT DATA");
 		if(clientdata.trustworthiness < 1){
 			// if clientdata is set, we can initialize the thundermap.
-			console.log("thundermap init");
 			init_thundermap();
 		}
 	}
-
-	console.log("clientdata trust " + trust);
-	console.log(clientdata);
 
 	clientdata.trustworthiness = trust;
 }
@@ -255,10 +246,8 @@ function revealClientWeather(lon, lat){
 
 
 function weatherparser(xml){
-	console.log(xml);
 
 	var forecasts = xml.getElementsByTagName("time");
-	console.log(forecasts);
 
 	var location = xml.getElementsByTagName("location");
 	var lon = location[1].getAttribute("longitude");
@@ -267,7 +256,6 @@ function weatherparser(xml){
 	var countryCode = location[0].getElementsByTagName("country")[0].innerHTML;
 
 	updateClientData(lon, lat, cityName, "", countryCode, countryCode, 1);
-	console.log(clientdata);
 	weatherdata = {};
 	$("#weatherfeed").html("");
 	$("#forecastHeader").html("Forecast for " + clientdata.geolocation.city + " " + clientdata.geolocation.region + ", " + clientdata.geolocation.country);
@@ -287,7 +275,6 @@ function weatherparser(xml){
     dates[time.date1]["seq"] = seq;
 
 	for(var i = 0; i < forecasts.length; i++){
-		console.log(forecasts[i].getAttribute("from") + " - " + forecasts[i].getAttribute("to"));
 		from = forecasts[i].getAttribute("from");
 		to = forecasts[i].getAttribute("to");
 		time = {}
@@ -299,7 +286,6 @@ function weatherparser(xml){
 		symbol = forecasts[i].getElementsByTagName("symbol")[0].getAttribute("var");
 		temperature = addCelciusValue(temperature);
 		tempint = Math.ceil(temperature.getAttribute("celciusvalue"))
-		console.log(Math.ceil(temperature.getAttribute("celciusvalue")) + "° C");
 		tablerow = "<tr>" + 
             "<td><i class=\"fa fa-clock-o w3-text-blue w3-large\" onclick=\"meteoxUpdate('"+time.date1 + time.from+"')\" style=\"cursor: pointer\"></i></td>" +
             "<td>" + "<img class=\"weathersymbol\" src=\"https://openweathermap.org/img/w/" + symbol + ".png\" style=\"height:60%;width:auto;\">" +"</td>" +
@@ -327,7 +313,6 @@ function weatherparser(xml){
 
 	for(var key in dates){
 		if(!(key.substr(0, 3) === "day")){
-			console.log("temperatures on " + key + ": " + dates[key]["min"] + " - " + dates[key]["max"]);
 			d = key.substr(8);
 			m = key.substr(5).split("-")[0];
 			$("#day" + dates[key]["seq"]).html(day(dates[key]["seq"]) + " " + d + " / " + m)
@@ -338,7 +323,6 @@ function weatherparser(xml){
 	function addCelciusValue(xml_temperature){
 		var unit = xml_temperature.getAttribute("unit");
 		var value = xml_temperature.getAttribute("value");
-		console.log("unit is " + unit + " " + value);
 		if(unit === ("kelvin")){
 			var newvalue = -273.15 + parseInt(value);
 			xml_temperature.setAttribute("celciusvalue", newvalue);
