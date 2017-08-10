@@ -232,6 +232,21 @@ function revealClientWeather(lon, lat){
    });
 }
 
+ function urlB64ToUint8Array(base64String) {
+      const padding = '='.repeat((4 - base64String.length % 4) % 4);
+      const base64 = (base64String + padding)
+        .replace(/\-/g, '+')
+        .replace(/_/g, '/');
+
+      const rawData = window.atob(base64);
+      const outputArray = new Uint8Array(rawData.length);
+
+      for (let i = 0; i < rawData.length; ++i) {
+        outputArray[i] = rawData.charCodeAt(i);
+      }
+      return outputArray;
+    }
+
 function weatherparser(xml){
 	console.log(xml);
 
@@ -302,19 +317,6 @@ function weatherparser(xml){
 
 
 	}
-
-	/* adjust weather symbol sizes */
-	/*$('.weathersymbol').on('bestfit',function(){
-    	var css;
-    	var ratio=$(this).width() / $(this).height();
-    	var pratio=$(this).parent().width() / $(this).parent().height();
-    	if (ratio<pratio) css={width:'auto', height:'100%'};
-    	else css={width:'100%', height:'auto'};
-    	$(this).css(css);
-	}).on('load', function(){
-    	$(this).trigger('bestfit');
-	}).trigger('bestfit');*/
-
 
 	for(var key in dates){
 		if(!(key.substr(0, 3) === "day")){
