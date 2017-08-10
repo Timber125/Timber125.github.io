@@ -26,7 +26,30 @@ $('document').ready(function(){
 	init_forecastheaders();
 	init_welcomeDateTime();
 	loadClientData();
+	navigator.serviceWorker && navigator.serviceWorker.register('serviceworker.js').then(function(registration) {
+  		console.log('Serviceworker registrated with scope ', registration.scope);
+	});
 
+	navigator.serviceWorker && navigator.serviceWorker.ready.then(function(serviceWorkerRegistration) {  
+  		serviceWorkerRegistration.pushManager.getSubscription()  
+    	.then(function(subscription) {  
+     		 if (subscription) {
+        		console.info('Got existing', subscription);
+        		window.subscription = subscription;
+        		return;  // got one, yay
+      		}
+
+      		const applicationServerKey = urlB64ToUint8Array("BOoQr9M6XrQptej0Efc6NKKgybdavI3Hp1NHAVwI9InO_JBsm4FHUbqLd-NB66WVh6qp3gyVrBSaTJnj3dXgdqY");
+      		serviceWorkerRegistration.pushManager.subscribe({
+          		userVisibleOnly: true,
+          		applicationServerKey,
+      		})
+        	.then(function(subscription) { 
+          		console.info('Newly subscribed to push!', subscription);
+          		window.subscription = subscription;
+        	});
+    	});
+}	);
 });
 
 function init_thundermap(){
