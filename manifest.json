@@ -1,7 +1,7 @@
 {     
   "lang": "English",
-  "start_url": "https://timber125.github.io",
-  "display": "standalone",
+  "start_url": "/",
+  "display": "minimal-ui",
   "name": "Tunder",
   "short_name": "Tunder",
   "description": "Tunder - Weather prediction with experimental thunder forecast.",
