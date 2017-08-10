@@ -257,7 +257,7 @@ function weatherparser(xml){
 		console.log(Math.ceil(temperature.getAttribute("celciusvalue")) + "° C");
 		tablerow = "<tr>" + 
             "<td><i class=\"fa fa-clock-o w3-text-blue w3-large\" onclick=\"meteoxUpdate('"+time.date1 + time.from+"')\" style=\"cursor: pointer\"></i></td>" +
-            "<td>" + "<img class=\"weathersymbol\" src=\"http://openweathermap.org/img/w/" + symbol + ".png\" style=\"height:60%;width:auto;\">" +"</td>" +
+            "<td>" + "<img class=\"weathersymbol\" src=\"https://openweathermap.org/img/w/" + symbol + ".png\" style=\"height:60%;width:auto;\">" +"</td>" +
             "<td>" + time.date1.substr(5).replace("-", "/") + ' ' + time.from.substr(0, 5) + "</td>" +
             "<td>" + forecasts[i].getElementsByTagName("clouds")[0].getAttribute("value") + "</td>" +
             "<td>" + tempint + "° C" + "</td>" +
