@@ -38,7 +38,7 @@
 		var myInit = { 
 			   method: 'GET',
                headers: new Headers(),
-               mode: 'cors',
+               mode: 'no-cors',
                cache: 'default' 
            };
 
