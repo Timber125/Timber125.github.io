@@ -1,4 +1,4 @@
-version = "v1";
+version = "v2";
 
 
 self.addEventListener('push', function(event) {
