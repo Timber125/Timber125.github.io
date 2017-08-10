@@ -1,11 +1,48 @@
-/** An empty service worker! */
-self.addEventListener('fetch', function(event) {
-  /** An empty fetch handler! */
-});
+version = "v1";
+
 
 self.addEventListener('push', function(event) {
   event.waitUntil(
     self.registration.showNotification('Got Push?', {
       body: 'Push Message received'
    }));
+});
+
+
+
+self.addEventListener("install", function (event) {
+    event.waitUntil(
+        caches.open(version).then(function (cache) {
+            return cache.addAll([
+                "/",
+                "/manifest.json",
+                "/serviceworker.js",
+                "/index.html",
+                "/assets/css/font_awesome.css",
+                "/assets/css/Raleway.css",
+                "/assets/css/reset.css",
+                "/assets/css/screen.css",
+                "/assets/css/template.css",
+                "/assets/js/script.js",
+                "/assets/js/countrycodes.js",
+                "/assets/js/meteox.js",
+                "/assets/media/icon.png",
+                "/assets/fonts/fontawesome-webfont.eot",
+                "/assets/fonts/FontAwesome.otf",
+                "/assets/fonts/fontawesome-webfont.svg",
+                "/assets/fonts/fontawesome-webfont.ttf",
+                "/assets/fonts/fontawesome-webfont.woff",
+                "/assets/fonts/fontawesome-webfont.woff2"
+            ])
+        })
+    );
+    console.log("Installed Tunder");
+});
+
+self.addEventListener("fetch", function (event) {
+    event.respondWith(
+    caches.match(event.request).then(function(response) {
+      return response || fetch(event.request);
+    })
+  	);
 });
