@@ -125,7 +125,7 @@ function loadClientData(){
 function revealClientIP(){
 	$.ajax({
     	type: "GET",
-    	url: "http://jsonip.com/?callback=?",
+    	url: "https://jsonip.com/?callback=?",
     	dataType: "json",
     	success: getLocation
    });
@@ -140,7 +140,7 @@ function getLocation(ip){
 	clientdata.ip = ip;
 	$.ajax({
     	type: "GET",
-    	url: "http://api.ipinfodb.com/v3/ip-city/?key=70977c7e2c2d4ef2ee6502ffce6d66156dd6b1ad98ed41f367365fdbf990c6a8&format=json",
+    	url: "https://api.ipinfodb.com/v3/ip-city/?key=70977c7e2c2d4ef2ee6502ffce6d66156dd6b1ad98ed41f367365fdbf990c6a8&format=json",
     	dataType: "json",
     	success: geoparserIP
    });
@@ -203,7 +203,7 @@ function revealClientWeather(lon, lat){
 	
 	$.ajax({
     	type: "GET",
-    	url: "http://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&appid=6d8dd0a5831d0506fda8140c8adf9677&mode=xml",
+    	url: "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&appid=6d8dd0a5831d0506fda8140c8adf9677&mode=xml",
     	dataType: "xml",
     	success: weatherparser
    });
