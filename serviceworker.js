@@ -3,8 +3,8 @@ version = "v3";
 
 self.addEventListener('push', function(event) {
   event.waitUntil(
-    self.registration.showNotification('Got Push?', {
-      body: 'Push Message received'
+    self.registration.showNotification('Weather notification', {
+      body: event.data.text();
    }));
 });
 
@@ -45,4 +45,11 @@ self.addEventListener("fetch", function (event) {
       		return response || fetch(event.request);
     	})
   	);
+});
+
+self.addEventListener("notificationclick", function(event) {
+    event.notification.close();
+    event.waitUntil(
+        clients.openWindow("https://timber125.github.io");
+    );
 });
