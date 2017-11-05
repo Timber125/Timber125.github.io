@@ -1,174 +1,29 @@
 <!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
 <html>
-<title>Tunder</title>
-<meta charset="UTF-8">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-<link rel="manifest" href="/manifest.json">
-<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
-<meta name="theme-color" content="#0078bd">
-<link rel="stylesheet" href="assets/css/reset.css">
-<link rel="stylesheet" href="assets/css/template.css">
-<link rel="stylesheet" href="assets/css/Raleway.css">
-<link rel="stylesheet" href="assets/css/font_awesome.css">
-<link rel="stylesheet" href="assets/css/style.css">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-<link rel="shortcut icon" href="images/tunder.png" />
-<style>
-html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
-</style>
-<body class="w3-light-grey">
-
-<!-- Top container -->
-<div class="w3-bar w3-top w3-black w3-large" style="z-index:4">
-  <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="w3_open();"><i class="fa fa-bars"></i> Home</button>
-  <span class="w3-bar-item w3-right">Tunder</span>
-</div>
-
-<!-- Sidebar/menu -->
-<nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
-  <div class="w3-container w3-row">
-    <div class="w3-col s4">
-      <img src="images/Tunder.jpg" class="w3-circle w3-margin-right" style="width:46px">
-    </div>
-    <div class="w3-col s8 w3-bar">
-      <span id="welcome_date"></span><br>
-      <span id="welcome_time"></span><br>
-    </div>
-  </div>
-  <hr>
-
-  <div class="w3-container">
-    <h5>Dashboard</h5>
-  </div>
-  <div class="w3-bar-block">
-    <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a>
-    <a href="index.html" class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-bolt fa-fw"></i>Force Refresh</a>
-    <a class="w3-bar-item w3-button w3-padding w3-blue" id="origin"></a>
-  </div>
-</nav>
-
-
-<!-- Overlay effect when opening sidebar on small screens -->
-<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
-
-<!-- !PAGE CONTENT! -->
-<div class="w3-main" style="margin-left:300px;margin-top:43px;">
-
-  <!-- Header -->
-  <header class="w3-container" style="padding-top:22px">
-    <h5><b><strong id="forecastHeader">Forecast</strong></b></h5>
-
-  </header>
-
-  <div class="w3-row-padding w3-margin-bottom">
-    <div class="w3-quarter">
-      <div class="w3-container w3-red w3-padding-16">
-        <div class="w3-left"><i class="fa fa-bolt w3-xxxlarge"></i></div>
-        <div class="w3-right">
-          <h3 id="day0temp"></h3>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div>
+            <textarea id="chatlog" rows="30" cols="80" disabled></textarea>
         </div>
-        <div class="w3-clear"></div>
-        <h4 id="day0"></h4>
-      </div>
-    </div>
-    <div class="w3-quarter">
-      <div class="w3-container w3-blue w3-padding-16">
-        <div class="w3-left"><i class="fa fa-bolt w3-xxxlarge"></i></div>
-        <div class="w3-right">
-          <h3 id="day1temp"></h3>
+        <div>
+        <form>
+        Chat handle:<br>
+            <input type="text" id="nicknamefield" name="name" value="Timber"><br>
+            Message:<br>
+            <input type="text" id="chatfield" name="msg" value="Type a message"><br>
+            <input type="button" value="send" id="postbutton">
+        </form>
         </div>
-        <div class="w3-clear"></div>
-        <h4 id="day1"></h4>
-      </div>
-    </div>
-    <div class="w3-quarter">
-      <div class="w3-container w3-teal w3-padding-16">
-        <div class="w3-left"><i class="fa fa-bolt w3-xxxlarge"></i></div>
-        <div class="w3-right">
-          <h3 id="day2temp"></h3>
-        </div>
-        <div class="w3-clear"></div>
-        <h4 id="day2"></h4>
-      </div>
-    </div>
-    <div class="w3-quarter">
-      <div class="w3-container w3-orange w3-padding-16">
-        <div class="w3-left"><i class="fa fa-bolt w3-xxxlarge"></i></div>
-        <div class="w3-right">
-          <h3 id="day3temp"></h3>
-        </div>
-        <div class="w3-clear"></div>
-        <h4 id="day3"></h4>
-      </div>
-    </div>
-
-  </div>
-
-  <div class="w3-panel">
-    <div class="w3-row-padding" style="margin:0 -16px">
-      <div class="w3-third">
-        <h5>Map</h5>
-        <img id="precipationmap" style="width:100%" alt="Regional Precipation Map">
-        <select id="precip_type" name="type">
-                  <option value="0">Temperature</option>
-                  <option value="1">Rain</option>
-                  <option value="2">Wind</option>
-                  <option value="3" selected>Lightning</option>
-                  <option value="4">Clouds</option>
-        </select>
-      </div>
-      <div class="w3-twothird">
-        <h5>Forecast</h5>
-        <table class="w3-table w3-striped w3-white" id="weatherfeed">
-          
-        </table>
-      </div>
-    </div>
-  </div>
-  <hr>
-  
-  <hr>
-
-  
-  <!-- Footer -->
-  <footer class="w3-container w3-padding-16 w3-light-grey">
-    
-  </footer>
-
-  <!-- End page content -->
-</div>
-
-<script>
-// Get the Sidebar
-var mySidebar = document.getElementById("mySidebar");
-
-// Get the DIV with overlay effect
-var overlayBg = document.getElementById("myOverlay");
-
-// Toggle between showing and hiding the sidebar, and add overlay effect
-function w3_open() {
-    if (mySidebar.style.display === 'block') {
-        mySidebar.style.display = 'none';
-        overlayBg.style.display = "none";
-    } else {
-        mySidebar.style.display = 'block';
-        overlayBg.style.display = "block";
-    }
-}
-
-// Close the sidebar with the close button
-function w3_close() {
-    mySidebar.style.display = "none";
-    overlayBg.style.display = "none";
-}
-</script>
-<script type="text/javascript" src="assets/js/client.js"></script>
-<script type="text/javascript" src="assets/js/countrycodes.js"></script>
-<script type="text/javascript" src="assets/js/meteox.js"></script>
-<script type="text/javascript" src="assets/js/jquery-2.1.4.js"></script>
-<script type="text/javascript" src="assets/js/script.js"></script>
-</body>
+    <script src="jquery-3.2.1.min.js"></script>
+    <script src="honeychat.js"></script>
+    </body>
 </html>
